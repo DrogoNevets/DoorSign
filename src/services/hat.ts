@@ -5,7 +5,7 @@ var sense = require("sense-hat-led").sync;
 
 class HatService {
     constructor() {
-        sense.lowLight(true);
+        sense.lowLight = true;
     }
 
     get leds() {
