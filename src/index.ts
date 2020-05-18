@@ -1,40 +1,13 @@
-import express from 'express';
+import express, { Application } from 'express';
+import controllers from './controllers';
+import hatSvc, { COLORS } from './services/hat';
 
-const senseHat = require('node-sense-hat');
+const app: Application = express();
 
-const app = express();
-
-const matrix = senseHat.Leds;
-const RED:Array<number> = [255, 0, 0];
-const GREEN:Array<number> = [0, 255, 0];
-
-function blockColour(a:Array<number>):void {
-	let screenArr:Array<Array<number>> = [
-        a, a, a, a, a, a, a, a,
-	a, a, a, a, a, a, a, a,
-	a, a, a, a, a, a, a, a,
-	a, a, a, a, a, a, a, a,
-	a, a, a, a, a, a, a, a,
-	a, a, a, a, a, a, a, a,
-	a, a, a, a, a, a, a, a,
-	a, a, a, a, a, a, a, a,
-    ];
-
-    matrix.setPixels(screenArr);
-}
-
-blockColour(RED);
+hatSvc.color(COLORS.RED);
 
 app.listen(8080, () => {
-    blockColour(GREEN);
+    controllers(app);
 
-    app.get('/busy', (req, res) => {
-        blockColour(RED);
-	res.end();
-    });
-
-    app.get('/available', (req, res) => {
-	blockColour(GREEN);
-        res.end();
-    });
+    hatSvc.color(COLORS.GREEN);
 });
