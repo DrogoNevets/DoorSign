@@ -1,6 +1,13 @@
+import { Z_STREAM_END } from "zlib";
+
 const senseHat = require('node-sense-hat');
+var sense = require("sense-hat-led").sync;
 
 class HatService {
+    constructor() {
+        sense.lowLight(true);
+    }
+
     get leds() {
         return senseHat.Leds;
     }
