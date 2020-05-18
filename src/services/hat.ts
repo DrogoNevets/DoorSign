@@ -36,7 +36,7 @@ process.on('SIGINT', () => {
 
     hatSvc.color(COLORS.BLACK);
 
-    process.exit();
+    // process.exit();
 });
 
 export default hatSvc;
