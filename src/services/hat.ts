@@ -25,7 +25,18 @@ class HatService {
 
 export const COLORS = {
     GREEN: [0, 255, 0],
-    RED: [255, 0, 0]
+    RED: [255, 0, 0],
+    BLACK: [0, 0, 0]
 }
 
-export default new HatService();
+const hatSvc = new HatService();
+
+process.on('SIGINT', () => {
+    console.log("Caught interrupt signal");
+
+    hatSvc.color(COLORS.BLACK);
+
+    process.exit();
+});
+
+export default hatSvc;
