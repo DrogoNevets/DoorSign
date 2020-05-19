@@ -1,15 +1,16 @@
 import { Z_STREAM_END } from "zlib";
+import { stringify } from "querystring";
 
 const senseHat = require('node-sense-hat');
 var sense = require("sense-hat-led").sync;
 
 class HatService {
-    private eventSchedule: any = {};
+    private eventSchedule: { [key: string]: number } = {};
 
     constructor() {
         sense.lowLight = true;
 
-        setInterval(this.processSchedule.bind(this), 5);
+        setInterval(this.processSchedule.bind(this), 100);
     }
 
     get leds() {
@@ -26,15 +27,24 @@ class HatService {
         this.leds.setPixels(arr);
     }
 
-    schedule(event: number, time: number) {
+    schedule(event: string, time: number) {
         this.eventSchedule[event] = time;
     }
 
     private processSchedule() {
         Object.entries(this.eventSchedule).forEach((entry) => {
-            let [key, value] = entry;
+            let [key, value]: [string, number] = entry;
+            let now: number = Date.now();
 
-            console.log(`${key}-${value}`);
+            if (now > value) {
+                let parts: Array<string> = key.split(':');
+
+                switch (parts[0]) {
+                    case '1':
+                        this.color(parts[1].split(',').map(i => parseInt(i)));
+                        break;
+                }
+            }
         });
     }
 }
