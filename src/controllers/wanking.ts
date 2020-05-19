@@ -9,7 +9,7 @@ export default (app: Application) => {
 
         // hatSvc.color(COLORS.PURPLE);
         hatSvc.text('Now wanking!', StateService.WANKING);
-        hatSvc.schedule('1:0,255,0', Date.now() + 5000);
+        hatSvc.schedule('1:0,255,0', Date.now() + 15000);
         stateSvc.state = StateService.WANKING;
         res.end();
     })
