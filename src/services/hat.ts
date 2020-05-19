@@ -4,8 +4,12 @@ const senseHat = require('node-sense-hat');
 var sense = require("sense-hat-led").sync;
 
 class HatService {
+    private eventSchedule: any = {};
+
     constructor() {
         sense.lowLight = true;
+
+        setInterval(this.processSchedule, 5);
     }
 
     get leds() {
@@ -20,6 +24,18 @@ class HatService {
         }
 
         this.leds.setPixels(arr);
+    }
+
+    schedule(event: number, time: number) {
+        this.eventSchedule[event] = time;
+    }
+
+    private processSchedule() {
+        Object.entries(this.eventSchedule).forEach((entry) => {
+            let [key, value] = entry;
+
+            console.log(`${key}-${value}`);
+        });
     }
 }
 
