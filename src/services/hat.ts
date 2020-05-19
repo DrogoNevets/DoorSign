@@ -9,7 +9,7 @@ class HatService {
     constructor() {
         sense.lowLight = true;
 
-        setInterval(this.processSchedule, 5);
+        setInterval(this.processSchedule.bind(this), 5);
     }
 
     get leds() {
