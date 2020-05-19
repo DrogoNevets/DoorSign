@@ -10,6 +10,8 @@ class HatService {
     constructor() {
         sense.lowLight = true;
 
+        sense.setRotation = 90;
+
         this.scheduler = setInterval(this.processSchedule.bind(this), 100);
     }
 
