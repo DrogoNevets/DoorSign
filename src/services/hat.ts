@@ -1,5 +1,4 @@
-import { Z_STREAM_END } from "zlib";
-import { stringify } from "querystring";
+import stateSvc, { StateService } from './state';
 
 const senseHat = require('node-sense-hat');
 var sense = require("sense-hat-led").sync;
@@ -42,6 +41,7 @@ class HatService {
                 switch (parts[0]) {
                     case '1':
                         this.color(parts[1].split(',').map(i => parseInt(i)));
+                        stateSvc.state = StateService.AVAILABLE
                         break;
                 }
             }
