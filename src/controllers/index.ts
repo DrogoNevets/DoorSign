@@ -7,5 +7,6 @@ import wanking from './wanking';
 export default (app: Application) => {
     available(app);
     busy(app);
+    state(app);
     wanking(app);
 }
