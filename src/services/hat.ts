@@ -19,10 +19,7 @@ class HatService {
 
     text(text: string, stateCheck: number): void {
         sense.showMessage(text, 0.1, COLORS.PURPLE, () => {
-            if (stateSvc.state === stateCheck)
-                this.text(text, stateCheck);
-            else
-                this.color([0, 255, 0]);
+            setTimeout(() => this.color(COLORS.PURPLE), 1500);
         });
     }
 
