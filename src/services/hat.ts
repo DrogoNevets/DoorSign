@@ -1,7 +1,7 @@
 import stateSvc, { StateService } from './state';
 
 const senseHat = require('node-sense-hat');
-var sense = require("sense-hat-led").sync;
+var sense = require("sense-hat-led");
 
 class HatService {
     private eventSchedule: { [key: string]: number } = {};
@@ -17,6 +17,12 @@ class HatService {
         return senseHat.Leds;
     }
 
+    text(text: string): void {
+        sense.showMessage("One small step for Pi!", 0.1, [255, 0, 0], () => {
+
+        });
+    }
+
     color(c: Array<number>): void {
         let arr: Array<Array<number>> = [];
 
@@ -27,15 +33,15 @@ class HatService {
         this.leds.setPixels(arr);
     }
 
-    schedule(event: string, time: number) {
+    schedule(event: string, time: number): void {
         this.eventSchedule[event] = time;
     }
 
-    stop() {
+    stop(): void {
         clearInterval(this.scheduler);
     }
 
-    private processSchedule() {
+    private processSchedule(): void {
         Object.entries(this.eventSchedule).forEach((entry) => {
             let [key, value]: [string, number] = entry;
             let now: number = Date.now();
