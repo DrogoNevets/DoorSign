@@ -5,11 +5,12 @@ var sense = require("sense-hat-led").sync;
 
 class HatService {
     private eventSchedule: { [key: string]: number } = {};
+    private scheduler: NodeJS.Timeout;
 
     constructor() {
         sense.lowLight = true;
 
-        setInterval(this.processSchedule.bind(this), 100);
+        this.scheduler = setInterval(this.processSchedule.bind(this), 100);
     }
 
     get leds() {
@@ -28,6 +29,10 @@ class HatService {
 
     schedule(event: string, time: number) {
         this.eventSchedule[event] = time;
+    }
+
+    stop() {
+        clearInterval(this.scheduler);
     }
 
     private processSchedule() {
@@ -60,11 +65,12 @@ const hatSvc = new HatService();
 process.on('SIGINT', () => {
     console.log("Caught interrupt signal");
 
+    hatSvc.stop();
     hatSvc.color(COLORS.BLACK);
 
     setTimeout(() => {
-        process.exit()
-    }, 2000);
+        process.exit();
+    }, 500);
 });
 
 export default hatSvc;
