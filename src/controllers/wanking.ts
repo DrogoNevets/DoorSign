@@ -8,8 +8,8 @@ export default (app: Application) => {
 
 
         // hatSvc.color(COLORS.PURPLE);
-        hatSvc.text('Now wanking!');
-        hatSvc.schedule('1:0,255,0', Date.now() + 1200000);
+        hatSvc.text('Now wanking!', StateService.WANKING);
+        hatSvc.schedule('1:0,255,0', Date.now() + 5000);
         stateSvc.state = StateService.WANKING;
         res.end();
     })

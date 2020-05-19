@@ -17,9 +17,12 @@ class HatService {
         return senseHat.Leds;
     }
 
-    text(text: string): void {
+    text(text: string, stateCheck: number): void {
         sense.showMessage(text, 0.1, COLORS.PURPLE, () => {
-            this.text(text);
+            if (stateSvc.state === stateCheck)
+                this.text(text);
+            else
+                this.color([0, 255, 0]);
         });
     }
 
