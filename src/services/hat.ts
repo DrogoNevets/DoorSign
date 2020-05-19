@@ -57,6 +57,7 @@ class HatService {
 export const COLORS = {
     GREEN: [0, 255, 0],
     RED: [255, 0, 0],
+    PURPLE: [88, 50, 168],
     BLACK: [0, 0, 0]
 }
 
