@@ -18,8 +18,8 @@ class HatService {
     }
 
     text(text: string): void {
-        sense.showMessage("One small step for Pi!", 0.1, [255, 0, 0], () => {
-
+        sense.showMessage(text, 0.1, COLORS.PURPLE, () => {
+            this.text(text);
         });
     }
 
