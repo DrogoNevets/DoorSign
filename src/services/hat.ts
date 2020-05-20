@@ -10,7 +10,7 @@ class HatService {
     constructor() {
         sense.lowLight = true;
 
-        sense.setRotation = 90;
+        sense.setRotation(90);
 
         this.scheduler = setInterval(this.processSchedule.bind(this), 100);
     }
@@ -21,7 +21,7 @@ class HatService {
 
     text(text: string, stateCheck: number): void {
         sense.showMessage(text, 0.1, COLORS.PURPLE, () => {
-            setTimeout(() => this.color(COLORS.PURPLE), 1500);
+            setTimeout(() => this.color(COLORS.PURPLE), 800);
         });
     }
 
