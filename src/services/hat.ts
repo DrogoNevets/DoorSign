@@ -1,16 +1,16 @@
 import stateSvc, { StateService } from './state';
 
 const senseHat = require('node-sense-hat');
-var sense = require("sense-hat-led");
+const LEDs = require("sense-hat-led");
 
 class HatService {
     private eventSchedule: { [key: string]: number } = {};
     private scheduler: NodeJS.Timeout;
 
     constructor() {
-        sense.lowLight = true;
+        LEDs.lowLight = true;
 
-        sense.setRotation(90);
+        LEDs.setRotation(90);
 
         this.scheduler = setInterval(this.processSchedule.bind(this), 100);
     }
@@ -20,7 +20,7 @@ class HatService {
     }
 
     text(text: string, stateCheck: number): void {
-        sense.showMessage(text, 0.1, COLORS.PURPLE, () => {
+        LEDs.showMessage(text, 0.1, COLORS.PURPLE, () => {
             setTimeout(() => this.color(COLORS.PURPLE), 800);
         });
     }
@@ -67,7 +67,7 @@ export const COLORS = {
     RED: [255, 0, 0],
     PURPLE: [88, 50, 168],
     BLACK: [0, 0, 0],
-    YELLOW: [255, 213, 0]
+    YELLOW: [255, 252, 149]
 }
 
 const hatSvc = new HatService();
