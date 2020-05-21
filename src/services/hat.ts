@@ -67,7 +67,7 @@ export const COLORS = {
     RED: [255, 0, 0],
     PURPLE: [88, 50, 168],
     BLACK: [0, 0, 0],
-    YELLOW: [255, 252, 149]
+    YELLOW: [255, 196, 0]
 }
 
 const hatSvc = new HatService();
