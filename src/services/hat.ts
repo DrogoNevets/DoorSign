@@ -4,7 +4,7 @@ import stateSvc, { StateService } from './state';
 const senseHat = require('node-sense-hat');
 const LEDs = require("sense-hat-led");
 
-const IMU = new senseHat.IMU();
+const IMU = new senseHat.Imu.IMU();
 
 class HatService {
     private eventSchedule: { [key: string]: number } = {};
