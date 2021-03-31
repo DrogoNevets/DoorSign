@@ -6,7 +6,7 @@ export default (app: Application) => {
         try {
           const temp = await HAT.getTemp();
 
-          res.send(temp).status(200).end();
+          res.send(temp.toString()).status(200).end();
         } catch(e) {
           res.send(e).status(500).end();
         }
