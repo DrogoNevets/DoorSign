@@ -1,7 +1,10 @@
+import { resolve } from 'path';
 import stateSvc, { StateService } from './state';
 
 const senseHat = require('node-sense-hat');
 const LEDs = require("sense-hat-led");
+
+const IMU = new senseHat.IMU();
 
 class HatService {
     private eventSchedule: { [key: string]: number } = {};
@@ -58,6 +61,19 @@ class HatService {
                         break;
                 }
             }
+        });
+    }
+
+    async getTemp():Promise<any> {
+        return new Promise((resolve, reject) => {
+            IMU.getValue((err:Error, data:any) => {
+                if(err) {
+                    reject(err);
+                    return;
+                }
+
+                resolve(data.temperature);
+            });
         });
     }
 }

@@ -4,6 +4,7 @@ import busy from './busy';
 import state from './state';
 import wanking from './wanking';
 import tentative from './tentative';
+import temperature from './temperature';
 
 export default (app: Application) => {
     available(app);
@@ -11,4 +12,5 @@ export default (app: Application) => {
     state(app);
     wanking(app);
     tentative(app);
+    temperature(app);
 }
